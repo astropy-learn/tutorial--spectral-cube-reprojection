@@ -1,4 +1,5 @@
 astropy
+astroquery
 dask
 ipydatagrid
 numpy
