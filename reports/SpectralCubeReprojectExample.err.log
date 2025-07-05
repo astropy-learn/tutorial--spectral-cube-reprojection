@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+mx = cube1.max(axis=0)
+mx.quicklook()
+------------------
+
+----- stderr -----
+WARNING: PossiblySlowWarning: This function (<function BaseSpectralCube.max at 0x7f25500afc40>) requires loading the entire cube into memory and may therefore be slow. [spectral_cube.utils]
+/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/spectral_cube/spectral_cube.py:440: RuntimeWarning: All-NaN slice encountered
+  out = function(self._get_filled_data(fill=fill,
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/spectral_cube/lower_dimensional_structures.py:430[39m, in [36mProjection.quicklook[39m[34m(self, filename, use_aplpy, aplpy_kwargs)[39m
+[32m    429[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mhasattr[39m([38;5;28mself[39m, [33m'[39m[33mFITSFigure[39m[33m'[39m):
+[32m--> [39m[32m430[39m     [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01maplpy[39;00m
+[32m    431[39m     [38;5;28mself[39m.FITSFigure = aplpy.FITSFigure([38;5;28mself[39m.hdu,
+[32m    432[39m                                        **aplpy_kwargs)
+
+[31mModuleNotFoundError[39m: No module named 'aplpy'
+
+During handling of the above exception, another exception occurred:
+
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[12][39m[32m, line 2[39m
+[32m      1[39m mx = cube1.max(axis=[32m0[39m)
+[32m----> [39m[32m2[39m [43mmx[49m[43m.[49m[43mquicklook[49m[43m([49m[43m)[49m
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/spectral_cube/lower_dimensional_structures.py:439[39m, in [36mProjection.quicklook[39m[34m(self, filename, use_aplpy, aplpy_kwargs)[39m
+[32m    437[39m             [38;5;28mself[39m.FITSFigure.save(filename)
+[32m    438[39m     [38;5;28;01mexcept[39;00m (wcs.InconsistentAxisTypesError, [38;5;167;01mImportError[39;00m):
+[32m--> [39m[32m439[39m         [38;5;28;43mself[39;49m[43m.[49m[43m_quicklook_mpl[49m[43m([49m[43mfilename[49m[43m=[49m[43mfilename[49m[43m)[49m
+[32m    440[39m [38;5;28;01melse[39;00m:
+[32m    441[39m     [38;5;28mself[39m._quicklook_mpl(filename=filename)
+
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/spectral_cube/lower_dimensional_structures.py:444[39m, in [36mProjection._quicklook_mpl[39m[34m(self, filename)[39m
+[32m    443[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m_quicklook_mpl[39m([38;5;28mself[39m, filename=[38;5;28;01mNone[39;00m):
+[32m--> [39m[32m444[39m     [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m pyplot
+[32m    445[39m     [38;5;28mself[39m.figure = pyplot.gcf()
+[32m    446[39m     [38;5;28mself[39m.image = pyplot.imshow([38;5;28mself[39m.value)
+
+[31mModuleNotFoundError[39m: No module named 'matplotlib'
+
